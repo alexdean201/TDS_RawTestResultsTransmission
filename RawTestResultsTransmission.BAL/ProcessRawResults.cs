@@ -36,28 +36,37 @@ namespace RawTestResultsTransmission.BAL
             }            
         }
 
-        public void GenerateOppIdAndExtractSSID()
+        // Insert an oppId, extract the SSID, change the bank key to 210
+        public void AlterData()
         {
             int i = 1;
             foreach(exam_report rec in records)
             {
                 TestResult testResult = new TestResult();
-                testResult.GenerateNewOppId(i.ToString());
 
+                // insert oppId
+                testResult.GenerateNewOppId(i.ToString());
                 var record = rec.report.ToString();
                 record = record.Replace("oppId=\"0\"", "oppId=\"" + testResult.OppId.ToString() + "\"");
-                testResult.TRT = record;
-
+                
                 // get the SSID of the student
                 var ssid = record.Substring(record.IndexOf("StudentIdentifier\" value=\"") + 26,
                                             record.IndexOf("contextDate", record.IndexOf("StudentIdentifier\" value=\"")) - 
                                            (record.IndexOf("StudentIdentifier\" value=\"") + 26) - 2);
                 testResult.SSID = ssid;
-                
+
+                // change bank key
+                record = record.Replace("bankKey=\"200\"", "bankKey=\"210\"");
+                record = record.Replace("formKey=\"200", "formKey=\"210");
+
+                testResult.TRT = record;
+
                 testResults.Add(testResult);
                 i++;
             }
         }
+
+        
 
         public void SendTRT()
         {

@@ -21,7 +21,7 @@ namespace RawTestResultsTransmission
                 ProcessRawResults processor = new ProcessRawResults();
 
                 processor.GetRawResultRecords();
-                processor.GenerateOppIdAndExtractSSID();
+                processor.AlterData();
                 processor.SendTRT();
                 processor.UpdateLastRun();
                 processor.SendDigest();

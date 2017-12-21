@@ -46,7 +46,7 @@ namespace RawTestResultsTransmission.BAL
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
             request.Headers.Add("Authorization", "Basic " + Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(Username + ":" + Password)));
             byte[] bytes;
-            bytes = Encoding.UTF8.GetBytes(TRT.ToString());
+            bytes = Encoding.UTF8.GetBytes(TRT);
             request.ContentType = "application/xml";
             request.ContentLength = bytes.Length;
             request.Method = "POST";

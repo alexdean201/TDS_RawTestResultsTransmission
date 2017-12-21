@@ -14,6 +14,11 @@ namespace RawTestResultsTransmission.BAL
         public bool TRTSent { get; set; }
         public string Message { get; set; }
         
+        public TestResult()
+        {
+            TRTSent = false;
+        }
+
         public void GenerateNewOppId(string placeValue)
         {
             // The raw TRT stored in the exam_audit.exam_report table has the oppId attribute value set to 0. As reported by Fairway in TDS-42:
